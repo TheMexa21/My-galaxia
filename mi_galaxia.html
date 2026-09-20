@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Galaxia 💛</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:100%;height:100%;overflow:hidden}
+body{
+  font-family:Arial,sans-serif;
+  background:radial-gradient(circle at 50% 50%,#ff1493 0%,#8d075e 35%,#25001f 68%,#050005 100%);
+  position:relative;
+}
+.galaxia{position:absolute;inset:0;overflow:hidden}
+.particula{
+  position:absolute;border-radius:50%;background:#ffd0f0;
+  box-shadow:0 0 8px #ff6bc7,0 0 18px #ff1493;
+  animation:flotar linear infinite,brillar 2s ease-in-out infinite alternate;
+}
+@keyframes flotar{0%{transform:translateY(110vh) translateX(0)}100%{transform:translateY(-20vh) translateX(80px)}}
+@keyframes brillar{from{opacity:.25}to{opacity:1}}
+.corazon{
+  position:absolute;color:rgba(255,150,220,.7);
+  text-shadow:0 0 10px #ff1493,0 0 25px #ff1493;
+  animation:subir linear infinite;
+}
+@keyframes subir{0%{transform:translateY(110vh) rotate(0);opacity:0}20%{opacity:.8}100%{transform:translateY(-20vh) rotate(30deg);opacity:0}}
+.nombre{
+  position:absolute;top:18px;width:100%;text-align:center;color:#fff;
+  font-size:20px;font-weight:bold;letter-spacing:3px;
+  text-shadow:0 0 10px #ff9cdd;z-index:5
+}
+.contenedor{position:relative;width:100%;height:100vh;display:flex;justify-content:center;align-items:center;z-index:10}
+.carta{
+  width:min(390px,86vw);min-height:510px;padding:30px 24px 24px;
+  border-radius:20px;background:linear-gradient(135deg,#fffef6,#fff3b8);
+  border:7px solid #e5b52c;
+  box-shadow:0 0 20px rgba(255,215,0,.75),0 0 60px rgba(255,174,0,.5),inset 0 0 30px rgba(255,200,50,.25);
+  text-align:center;position:relative;animation:aparecer 1.1s ease
+}
+@keyframes aparecer{from{transform:scale(.5) rotate(-5deg);opacity:0}to{transform:scale(1) rotate(0);opacity:1}}
+.titulo{font-family:cursive;font-size:42px;color:#594b3b;margin-bottom:12px}
+.mensaje{font-size:16px;line-height:1.55;color:#3e3e3e;margin-bottom:10px}
+.te-amo{font-family:cursive;font-size:36px;color:#5d4635;margin:10px 0}
+.ramo{height:190px;position:relative;margin-top:0}
+.flor{position:absolute;width:85px;height:85px;display:flex;justify-content:center;align-items:center;animation:balanceo 3s ease-in-out infinite}
+.petalo{
+  position:absolute;width:32px;height:50px;
+  background:linear-gradient(#ffe66d,#f5b400);border-radius:50%;
+  transform-origin:center 42px;box-shadow:0 2px 4px rgba(0,0,0,.2)
+}
+.centro-flor{
+  position:absolute;width:35px;height:35px;border-radius:50%;
+  background:radial-gradient(circle,#f6d65b 0%,#6b3d16 35%,#241005 100%);
+  z-index:5
+}
+.hoja{position:absolute;width:55px;height:28px;background:#4e9b39;border-radius:100% 0 100% 0;bottom:10px}
+.hoja.izq{left:30px;transform:rotate(-35deg)}
+.hoja.der{right:30px;transform:scaleX(-1) rotate(-35deg)}
+@keyframes balanceo{0%,100%{rotate:-3deg}50%{rotate:4deg;translate:0 -4px}}
+button{
+  border:0;padding:11px 30px;border-radius:25px;
+  background:linear-gradient(#ffd92f,#f2a900);color:#4b3500;font-weight:bold;
+  cursor:pointer;box-shadow:0 5px 12px rgba(0,0,0,.25);transition:.3s
+}
+button:hover{transform:scale(1.08);box-shadow:0 0 20px #ffd42a}
+.ocultar{animation:desaparecer .7s forwards}
+@keyframes desaparecer{to{opacity:0;transform:scale(.4) rotate(10deg)}}
+</style>
+</head>
+<body>
+<div class="galaxia" id="galaxia"></div>
+<div class="nombre">MI GALAXIA 💗</div>
+<div class="contenedor">
+  <div class="carta" id="carta">
+    <h1 class="titulo">Mi amor</h1>
+    <p class="mensaje">Estas flores amarillas son como tú: brillantes, radiantes y llenas de alegría.</p>
+    <p class="mensaje">Gracias por iluminar cada uno de mis días. Eres simplemente hermosa.</p>
+    <div class="te-amo">Te Amo Mucho 💛</div>
+    <div class="ramo" id="ramo"></div>
+    <button onclick="cerrarCarta()">Cerrar</button>
+  </div>
+</div>
+<script>
+const galaxia=document.getElementById("galaxia");
+for(let i=0;i<90;i++){
+  const p=document.createElement("div");
+  p.className="particula";
+  p.style.left=Math.random()*100+"%";
+  p.style.top=Math.random()*100+"%";
+  const s=Math.random()*6+2;
+  p.style.width=s+"px";p.style.height=s+"px";
+  p.style.animationDuration=(5+Math.random()*10)+"s";
+  p.style.animationDelay=(-Math.random()*10)+"s";
+  galaxia.appendChild(p);
+}
+for(let i=0;i<18;i++){
+  const c=document.createElement("div");
+  c.className="corazon";c.textContent="♡";
+  c.style.left=Math.random()*100+"%";
+  c.style.fontSize=(20+Math.random()*35)+"px";
+  c.style.animationDuration=(7+Math.random()*8)+"s";
+  c.style.animationDelay=(-Math.random()*10)+"s";
+  galaxia.appendChild(c);
+}
+const ramo=document.getElementById("ramo");
+function crearFlor(x,y,t){
+  const f=document.createElement("div");f.className="flor";
+  f.style.left=x+"%";f.style.top=y+"px";f.style.transform=`scale(${t})`;
+  for(let i=0;i<10;i++){
+    const p=document.createElement("div");p.className="petalo";
+    p.style.transform=`rotate(${i*36}deg) translateY(-22px)`;
+    f.appendChild(p);
+  }
+  const centro=document.createElement("div");centro.className="centro-flor";f.appendChild(centro);
+  const h1=document.createElement("div");h1.className="hoja izq";f.appendChild(h1);
+  const h2=document.createElement("div");h2.className="hoja der";f.appendChild(h2);
+  ramo.appendChild(f);
+}
+[[10,60,.75],[30,35,1],[50,15,.7],[68,40,1.1],[82,70,.7],[43,75,.8]].forEach(a=>crearFlor(...a));
+function cerrarCarta(){document.getElementById("carta").classList.add("ocultar")}
+</script>
+</body>
+</html>
